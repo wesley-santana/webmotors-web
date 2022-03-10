@@ -1,7 +1,15 @@
+import Header from './components/Header';
+import Tab from './components/Tab';
+import GlobalStyle from './styles/globalStyles';
+
 function App() {
 	return (
-		<div className="App">
-			<h1>ola</h1>
+		<div>
+			<GlobalStyle />
+			<div className="container">
+				<Header />
+				<Tab />
+			</div>
 		</div>
 	);
 }
