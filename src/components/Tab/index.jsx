@@ -50,15 +50,25 @@ function Tab() {
 					<Checkbox label="Usados" value checked />
 				</S.Row>
 				<S.Row>
-					<Select placeholder="Onde" width="3" options={locationsOptions} />
-					<Select placeholder="Raio" width="1" />
-					<Select placeholder="Marca" width="2" mLeft="16px" />
-					<Select placeholder="Modelo" width="2" mLeft="16px" />
-				</S.Row>
-				<S.Row>
-					<Select placeholder="Ano desejado" width="2" />
-					<Select placeholder="Faixa de preço" width="2" mLeft="16px" />
-					<Select placeholder="Versão" width="4" mLeft="16px" />
+					<S.Column>
+						<S.Row>
+							<Select placeholder="Onde" width="3" options={locationsOptions} />
+							<Select placeholder="Raio" width="1" />
+						</S.Row>
+						<S.Row>
+							<Select placeholder="Ano desejado" width="2" />
+							<Select placeholder="Faixa de preço" width="2" mLeft="16px" />
+						</S.Row>
+					</S.Column>
+					<S.Column>
+						<S.Row>
+							<Select placeholder="Marca" width="1" mLeft="16px" />
+							<Select placeholder="Modelo" width="1" mLeft="16px" />
+						</S.Row>
+						<S.Row>
+							<Select placeholder="Versão" width="1" mLeft="16px" />
+						</S.Row>
+					</S.Column>
 				</S.Row>
 				<S.Row
 					style={{ justifyContent: 'space-between', alignItems: 'center' }}
@@ -67,10 +77,10 @@ function Tab() {
 						<S.Icon icon={['fas', 'angle-right']} />
 						Busca Avançada
 					</S.ButtonDropDown>
-					<div>
+					<S.ButtonsWrapper>
 						<S.TextButtom>Limpar filtros</S.TextButtom>
 						<S.ButtonDefault>VER OFERTAS</S.ButtonDefault>
-					</div>
+					</S.ButtonsWrapper>
 				</S.Row>
 			</S.TabContent>
 		</>

@@ -1,12 +1,14 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import styled from 'styled-components';
-import Select from 'react-select';
 
 const Tab = styled.div`
 	display: flex;
 	justify-content: space-between;
 	flex-direction: row;
 	margin-top: 32px;
+	@media (max-width: 768px) {
+		flex-direction: column-reverse;
+	}
 `;
 
 const TextWrapper = styled.div`
@@ -56,8 +58,8 @@ const Button = styled.div`
 `;
 
 const ButtonWarning = styled.button`
-	width: 200px;
-	height: 50px;
+	width: 240px;
+	height: 40px;
 	border: solid 2px #ff6d00;
 	border-radius: 3px;
 	font-size: 16px;
@@ -85,12 +87,20 @@ const Row = styled.div`
 	flex-direction: row;
 	margin-top: 16px;
 	margin-bottom: 16px;
+	@media (max-width: 768px) {
+		flex-direction: column;
+		margin-top: 0;
+		margin-bottom: 0;
+	}
 `;
 
-const RSelect = styled(Select)`
-	flex: ${(props) => props.width};
-	display: block;
-	border-radius: 1;
+const Column = styled.div`
+	display: flex;
+	flex-direction: column;
+	width: 50%;
+	@media (max-width: 768px) {
+		width: 100%;
+	}
 `;
 
 const ButtonDropDown = styled.button`
@@ -107,6 +117,18 @@ const ButtonDropDown = styled.button`
 	&:hover {
 		opacity: 0.7;
 	}
+	@media (max-width: 768px) {
+		align-self: flex-start;
+	}
+`;
+
+const ButtonsWrapper = styled.div`
+	display: flex;
+	flex-direction: row;
+	@media (max-width: 768px) {
+		flex-direction: column-reverse;
+		margin-top: 16px;
+	}
 `;
 
 const TextButtom = styled.button`
@@ -116,6 +138,9 @@ const TextButtom = styled.button`
 	font-size: 16px;
 	&:hover {
 		opacity: 0.7;
+	}
+	@media (max-width: 768px) {
+		margin-top: 16px;
 	}
 `;
 
@@ -145,8 +170,9 @@ export {
 	ButtonWarning,
 	TabContent,
 	Row,
-	RSelect,
 	ButtonDropDown,
 	TextButtom,
 	ButtonDefault,
+	Column,
+	ButtonsWrapper,
 };
