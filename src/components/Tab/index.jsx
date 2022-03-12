@@ -138,13 +138,19 @@ function Tab() {
 						<S.Row>
 							<SelectIcon
 								placeholder="Onde"
+								borderRadius="3px 0px 0px 4px"
 								width="3"
 								iconVisible
 								options={locationsOptions}
 								value={selectdLocation}
 								onChange={handleChangeLocations}
 							/>
-							<Select placeholder="Raio" width="1" options={radiusOptions} />
+							<Select
+								placeholder="Raio"
+								borderRadius="0px 3px 3px 0px"
+								width="1"
+								options={radiusOptions}
+							/>
 						</S.Row>
 						<S.Row>
 							<Select
@@ -165,6 +171,7 @@ function Tab() {
 							<Select
 								placeholder="Marca"
 								width="1"
+								message="nenhuma marca"
 								mLeft="16px"
 								value={selectedMake}
 								onChange={handleChangeMakes}
@@ -173,6 +180,7 @@ function Tab() {
 							<Select
 								placeholder="Modelo"
 								value={selectedModel}
+								message="nenhum modelo"
 								onChange={handleChangeModels}
 								options={parseMake(modelsOptions)}
 								width="1"
@@ -182,6 +190,7 @@ function Tab() {
 						<S.Row>
 							<Select
 								placeholder="Versão"
+								message="nenhuma versão"
 								options={parseMake(versionsOptions)}
 								value={selectedVersion}
 								onChange={handleChangeVersions}

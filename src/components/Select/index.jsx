@@ -1,15 +1,17 @@
 import React from 'react';
 import RSelect from './styled';
 
-function Select({ className, options, iconVisible, ...props }) {
+function Select({ className, options, borderRadius, message, ...props }) {
 	return (
 		<RSelect
 			{...props}
 			options={options}
-			noOptionsMessage={() => 'Local não encontrado!'}
+			noOptionsMessage={() =>
+				message ? `Ops, não encontramos ${message}` : ''
+			}
 			theme={(theme) => ({
 				...theme,
-				borderRadius: 0,
+				borderRadius: borderRadius || 3,
 				colors: {
 					...theme.colors,
 					primary25: '#ffffff',

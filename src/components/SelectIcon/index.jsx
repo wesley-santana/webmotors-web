@@ -18,11 +18,22 @@ function ValueContainer({ children, ...props }) {
 	);
 }
 
-function SelectIcon({ className, options, iconVisible, ...props }) {
+function SelectIcon({
+	className,
+	options,
+	borderRadius,
+	iconVisible,
+	...props
+}) {
 	const styles = {
 		valueContainer: (base) => ({
 			...base,
 			paddingLeft: 24,
+		}),
+		control: (base) => ({
+			...base,
+			borderRight: 0,
+			boxShadow: 'none',
 		}),
 	};
 
@@ -32,10 +43,10 @@ function SelectIcon({ className, options, iconVisible, ...props }) {
 			components={{ ValueContainer }}
 			styles={styles}
 			options={options}
-			noOptionsMessage={() => 'Local não encontrado!'}
+			noOptionsMessage={() => `Ops, não encontramos`}
 			theme={(theme) => ({
 				...theme,
-				borderRadius: 0,
+				borderRadius: borderRadius || 0,
 				colors: {
 					...theme.colors,
 					primary25: '#ffffff',
