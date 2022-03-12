@@ -1,7 +1,7 @@
 import React from 'react';
 import RSelect from './styled';
 
-function Select({ className, options, ...props }) {
+function Select({ className, options, iconVisible, ...props }) {
 	return (
 		<RSelect
 			{...props}
@@ -13,7 +13,7 @@ function Select({ className, options, ...props }) {
 				colors: {
 					...theme.colors,
 					primary25: '#ffffff',
-					primary: '#f3123c',
+					primary: '#444444',
 				},
 			})}
 		/>

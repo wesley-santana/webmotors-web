@@ -3,6 +3,7 @@ import {
 	faCar,
 	faMotorcycle,
 	faAngleRight,
+	faLocationDot,
 } from '@fortawesome/free-solid-svg-icons';
 
-library.add(faCar, faMotorcycle, faAngleRight);
+library.add(faCar, faMotorcycle, faAngleRight, faLocationDot);

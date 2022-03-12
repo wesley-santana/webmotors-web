@@ -85,7 +85,6 @@ const TabContent = styled.div`
 const Row = styled.div`
 	display: flex;
 	flex-direction: row;
-	margin-top: 16px;
 	margin-bottom: 16px;
 	@media (max-width: 768px) {
 		flex-direction: column;
