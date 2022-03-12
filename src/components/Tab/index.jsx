@@ -14,6 +14,9 @@ function Tab() {
 	const [selectedVersion, setSelectedVersion] = useState('');
 	const [selectdLocation, setSelectedLocation] = useState('');
 
+	const [loadingModels, setLoadingModel] = useState(false);
+	const [loadingVersions, setLoadingVersions] = useState(false);
+
 	const locationsOptions = [
 		{ label: 'Acre', value: 'AC' },
 		{ label: 'Alagoas', value: 'AL' },
@@ -68,17 +71,19 @@ function Tab() {
 	const parseMake = (makes) =>
 		makes.map(({ Name, ID }) => ({ label: Name, value: ID }));
 
-	const getModels = (id) => {
-		api
-			.get(`/Model?MakeID=${id}`)
-			.then((response) => setModelsOptions(response.data));
-	};
+	async function getModels(id) {
+		setLoadingModel(true);
+		const models = await api.get(`/Model?MakeID=${id}`);
+		setLoadingModel(false);
+		setModelsOptions(models.data);
+	}
 
-	const getVersions = (id) => {
-		api
-			.get(`/Version?ModelID=${id}`)
-			.then((response) => setVersionOptions(response.data));
-	};
+	async function getVersions(id) {
+		setLoadingVersions(true);
+		const versions = await api.get(`/Version?ModelID=${id}`);
+		setLoadingVersions(false);
+		setVersionOptions(versions.data);
+	}
 	const handleChangeMakes = (make) => {
 		setModelsOptions([]);
 		setSelectedMoldel('');
@@ -126,7 +131,16 @@ function Tab() {
 						</S.TextWrapper>
 					</S.Button>
 				</S.ButtonGroup>
-				<S.ButtonWarning>Vender meu carro</S.ButtonWarning>
+				<S.ButtonWarning
+					onClick={() =>
+						window.open(
+							'https://www.webmotors.com.br/vender?lkid=1006',
+							'_blank'
+						)
+					}
+				>
+					Vender meu carro
+				</S.ButtonWarning>
 			</S.Tab>
 			<S.TabContent>
 				<S.Row style={{ padding: '8px' }}>
@@ -139,7 +153,7 @@ function Tab() {
 							<SelectIcon
 								placeholder="Onde"
 								borderRadius="3px 0px 0px 4px"
-								width="3"
+								width="2"
 								iconVisible
 								options={locationsOptions}
 								value={selectdLocation}
@@ -178,7 +192,7 @@ function Tab() {
 								options={parseMake(makesOptions)}
 							/>
 							<Select
-								placeholder="Modelo"
+								placeholder={loadingModels ? 'buscando...' : 'Modelos'}
 								value={selectedModel}
 								message="nenhum modelo"
 								onChange={handleChangeModels}
@@ -189,7 +203,7 @@ function Tab() {
 						</S.Row>
 						<S.Row>
 							<Select
-								placeholder="Versão"
+								placeholder={loadingVersions ? 'buscando...' : 'Versão'}
 								message="nenhuma versão"
 								options={parseMake(versionsOptions)}
 								value={selectedVersion}

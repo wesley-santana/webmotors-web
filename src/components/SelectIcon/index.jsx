@@ -1,13 +1,13 @@
 import React from 'react';
 import { components } from 'react-select';
-import { RSelectIcon, Icon } from './styled';
+import * as S from './styled';
 
 function ValueContainer({ children, ...props }) {
 	return (
 		components.ValueContainer && (
 			<components.ValueContainer {...props}>
 				{!!children && (
-					<Icon
+					<S.Icon
 						style={{ position: 'absolute', left: 6 }}
 						icon={['fas', 'location-dot']}
 					/>
@@ -38,7 +38,7 @@ function SelectIcon({
 	};
 
 	return (
-		<RSelectIcon
+		<S.RSelectIcon
 			{...props}
 			components={{ ValueContainer }}
 			styles={styles}
