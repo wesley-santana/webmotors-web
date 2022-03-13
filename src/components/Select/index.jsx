@@ -2,9 +2,17 @@ import React from 'react';
 import RSelect from './styled';
 
 function Select({ className, options, borderRadius, message, ...props }) {
+	const styles = {
+		control: (base) => ({
+			...base,
+			height: 44,
+		}),
+	};
+
 	return (
 		<RSelect
 			{...props}
+			styles={styles}
 			options={options}
 			noOptionsMessage={() =>
 				message ? `Ops, não encontramos ${message}` : ''

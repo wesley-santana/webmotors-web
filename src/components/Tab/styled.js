@@ -13,8 +13,9 @@ const Tab = styled.div`
 
 const TextWrapper = styled.div`
 	display: flex;
+	padding-left: 8px;
 	flex-direction: column;
-	margin-left: 16px;
+	margin-left: 8px;
 `;
 
 const ButtonGroup = styled.div`
@@ -135,6 +136,7 @@ const TextButtom = styled.button`
 	border: none;
 	color: #828383;
 	font-size: 16px;
+	cursor: pointer;
 	&:hover {
 		opacity: 0.7;
 	}

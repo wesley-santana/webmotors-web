@@ -9,10 +9,16 @@ function Tab() {
 	const [makesOptions, setMakesOptions] = useState([]);
 	const [modelsOptions, setModelsOptions] = useState([]);
 	const [versionsOptions, setVersionOptions] = useState([]);
+
 	const [selectedMake, setSelectedMake] = useState('');
 	const [selectedModel, setSelectedMoldel] = useState('');
 	const [selectedVersion, setSelectedVersion] = useState('');
 	const [selectdLocation, setSelectedLocation] = useState('');
+	const [checkBoxUsed, setCheckBoxUsed] = useState(false);
+	const [checkBoxNew, setCheckBoxNew] = useState(false);
+	const [selectedRadius, setSelectedRadius] = useState('');
+	const [selectedYear, setSelectedYear] = useState('');
+	const [selectePrice, setSelectePrice] = useState('');
 
 	const [loadingModels, setLoadingModel] = useState(false);
 	const [loadingVersions, setLoadingVersions] = useState(false);
@@ -108,6 +114,36 @@ function Tab() {
 		setSelectedLocation(location);
 	};
 
+	const handleChangeRadius = (radius) => {
+		setSelectedRadius(radius);
+	};
+
+	const handleChangeYear = (year) => {
+		setSelectedYear(year);
+	};
+
+	const handleChangePrice = (price) => {
+		setSelectePrice(price);
+	};
+
+	const handleChangeUsed = (event) => {
+		setCheckBoxUsed(event.target.checked);
+	};
+
+	const handleChangeNew = (event) => {
+		setCheckBoxNew(event.target.checked);
+	};
+
+	const clearFilters = () => {
+		setSelectedMake('');
+		setSelectedMoldel('');
+		setSelectedVersion('');
+		setSelectedLocation('');
+		setSelectedRadius('');
+		setSelectedYear('');
+		setSelectePrice('');
+	};
+
 	useEffect(() => {
 		api.get('/Make').then((response) => setMakesOptions(response.data));
 	}, []);
@@ -144,8 +180,16 @@ function Tab() {
 			</S.Tab>
 			<S.TabContent>
 				<S.Row style={{ padding: '8px' }}>
-					<Checkbox label="Novos" value checked />
-					<Checkbox label="Usados" value checked />
+					<Checkbox
+						label="Novos"
+						checked={checkBoxNew}
+						onChange={handleChangeNew}
+					/>
+					<Checkbox
+						label="Usados"
+						checked={checkBoxUsed}
+						onChange={handleChangeUsed}
+					/>
 				</S.Row>
 				<S.Row>
 					<S.Column>
@@ -160,6 +204,8 @@ function Tab() {
 								onChange={handleChangeLocations}
 							/>
 							<Select
+								onChange={handleChangeRadius}
+								value={selectedRadius}
 								placeholder="Raio"
 								borderRadius="0px 3px 3px 0px"
 								width="1"
@@ -170,11 +216,15 @@ function Tab() {
 							<Select
 								placeholder="Ano desejado"
 								width="2"
+								onChange={handleChangeYear}
+								value={selectedYear}
 								options={yearOptions}
 							/>
 							<Select
 								placeholder="Faixa de preço"
 								options={priceOptions}
+								onChange={handleChangePrice}
+								value={selectePrice}
 								width="2"
 								mLeft="16px"
 							/>
@@ -222,7 +272,7 @@ function Tab() {
 						Busca Avançada
 					</S.ButtonDropDown>
 					<S.ButtonsWrapper>
-						<S.TextButtom>Limpar filtros</S.TextButtom>
+						<S.TextButtom onClick={clearFilters}>Limpar filtros</S.TextButtom>
 						<S.ButtonDefault>VER OFERTAS</S.ButtonDefault>
 					</S.ButtonsWrapper>
 				</S.Row>

@@ -34,6 +34,7 @@ function SelectIcon({
 			...base,
 			borderRight: 0,
 			boxShadow: 'none',
+			height: 44,
 		}),
 	};
 
