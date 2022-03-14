@@ -24,7 +24,7 @@ const ButtonGroup = styled.div`
 `;
 
 const Text = styled.div`
-	color: #828383;
+	color: ${(props) => (props.active ? '#f3123c' : '#828383')};
 	font-size: 24px;
 `;
 
@@ -34,7 +34,7 @@ const Paragraph = styled.div`
 `;
 
 const Icon = styled(FontAwesomeIcon)`
-	color: #828383;
+	color: ${(props) => (props.active ? '#f3123c' : '#828383')};
 `;
 
 const Button = styled.div`
@@ -46,7 +46,8 @@ const Button = styled.div`
 	cursor: pointer;
 	font-size: 18px;
 	padding: 8px;
-	border-bottom: solid 1px #d0d0d0;
+	border-bottom: solid
+		${(props) => (props.active ? '#f3123c 3px' : '#d0d0d0 1px')};
 	&:hover {
 		border-bottom: solid 3px #f3123c;
 	}

@@ -23,6 +23,8 @@ function Tab() {
 	const [loadingModels, setLoadingModel] = useState(false);
 	const [loadingVersions, setLoadingVersions] = useState(false);
 
+	const [activeTab, setActiveTab] = useState('car');
+
 	const locationsOptions = [
 		{ label: 'Acre', value: 'AC' },
 		{ label: 'Alagoas', value: 'AL' },
@@ -144,6 +146,14 @@ function Tab() {
 		setSelectePrice('');
 	};
 
+	const handleClickCar = () => {
+		setActiveTab('car');
+	};
+
+	const handleClickMotorcycle = () => {
+		setActiveTab('motorcycle');
+	};
+
 	useEffect(() => {
 		api.get('/Make').then((response) => setMakesOptions(response.data));
 	}, []);
@@ -152,18 +162,29 @@ function Tab() {
 		<>
 			<S.Tab style={{ justifyContent: 'space-between', alignItems: 'center' }}>
 				<S.ButtonGroup>
-					<S.Button>
-						<S.Icon icon={['fas', 'car']} size="xl" />
+					<S.Button active={activeTab === 'car'} onClick={handleClickCar}>
+						<S.Icon
+							active={activeTab === 'car'}
+							icon={['fas', 'car']}
+							size="xl"
+						/>
 						<S.TextWrapper>
 							<S.Paragraph>COMPRAR</S.Paragraph>
-							<S.Text>CARRO</S.Text>
+							<S.Text active={activeTab === 'car'}>CARRO</S.Text>
 						</S.TextWrapper>
 					</S.Button>
-					<S.Button>
-						<S.Icon icon={['fas', 'motorcycle']} size="xl" />
+					<S.Button
+						active={activeTab === 'motorcycle'}
+						onClick={handleClickMotorcycle}
+					>
+						<S.Icon
+							active={activeTab === 'motorcycle'}
+							icon={['fas', 'motorcycle']}
+							size="xl"
+						/>
 						<S.TextWrapper>
 							<S.Paragraph>COMPRAR</S.Paragraph>
-							<S.Text>MOTO</S.Text>
+							<S.Text active={activeTab === 'motorcycle'}>MOTO</S.Text>
 						</S.TextWrapper>
 					</S.Button>
 				</S.ButtonGroup>
@@ -178,105 +199,107 @@ function Tab() {
 					Vender meu carro
 				</S.ButtonWarning>
 			</S.Tab>
-			<S.TabContent>
-				<S.Row style={{ padding: '8px' }}>
-					<Checkbox
-						label="Novos"
-						checked={checkBoxNew}
-						onChange={handleChangeNew}
-					/>
-					<Checkbox
-						label="Usados"
-						checked={checkBoxUsed}
-						onChange={handleChangeUsed}
-					/>
-				</S.Row>
-				<S.Row>
-					<S.Column>
-						<S.Row>
-							<SelectIcon
-								placeholder="Onde"
-								borderRadius="3px 0px 0px 4px"
-								width="2"
-								iconVisible
-								options={locationsOptions}
-								value={selectdLocation}
-								onChange={handleChangeLocations}
-							/>
-							<Select
-								onChange={handleChangeRadius}
-								value={selectedRadius}
-								placeholder="Raio"
-								borderRadius="0px 3px 3px 0px"
-								width="1"
-								options={radiusOptions}
-							/>
-						</S.Row>
-						<S.Row>
-							<Select
-								placeholder="Ano desejado"
-								width="2"
-								onChange={handleChangeYear}
-								value={selectedYear}
-								options={yearOptions}
-							/>
-							<Select
-								placeholder="Faixa de preço"
-								options={priceOptions}
-								onChange={handleChangePrice}
-								value={selectePrice}
-								width="2"
-								mLeft="16px"
-							/>
-						</S.Row>
-					</S.Column>
-					<S.Column>
-						<S.Row>
-							<Select
-								placeholder="Marca"
-								width="1"
-								message="nenhuma marca"
-								mLeft="16px"
-								value={selectedMake}
-								onChange={handleChangeMakes}
-								options={parseMake(makesOptions)}
-							/>
-							<Select
-								placeholder={loadingModels ? 'buscando...' : 'Modelos'}
-								value={selectedModel}
-								message="nenhum modelo"
-								onChange={handleChangeModels}
-								options={parseMake(modelsOptions)}
-								width="1"
-								mLeft="16px"
-							/>
-						</S.Row>
-						<S.Row>
-							<Select
-								placeholder={loadingVersions ? 'buscando...' : 'Versão'}
-								message="nenhuma versão"
-								options={parseMake(versionsOptions)}
-								value={selectedVersion}
-								onChange={handleChangeVersions}
-								width="1"
-								mLeft="16px"
-							/>
-						</S.Row>
-					</S.Column>
-				</S.Row>
-				<S.Row
-					style={{ justifyContent: 'space-between', alignItems: 'center' }}
-				>
-					<S.ButtonDropDown>
-						<S.Icon icon={['fas', 'angle-right']} />
-						Busca Avançada
-					</S.ButtonDropDown>
-					<S.ButtonsWrapper>
-						<S.TextButtom onClick={clearFilters}>Limpar filtros</S.TextButtom>
-						<S.ButtonDefault>VER OFERTAS</S.ButtonDefault>
-					</S.ButtonsWrapper>
-				</S.Row>
-			</S.TabContent>
+			{activeTab === 'car' && (
+				<S.TabContent>
+					<S.Row style={{ padding: '8px' }}>
+						<Checkbox
+							label="Novos"
+							checked={checkBoxNew}
+							onChange={handleChangeNew}
+						/>
+						<Checkbox
+							label="Usados"
+							checked={checkBoxUsed}
+							onChange={handleChangeUsed}
+						/>
+					</S.Row>
+					<S.Row>
+						<S.Column>
+							<S.Row>
+								<SelectIcon
+									placeholder="Onde"
+									borderRadius="3px 0px 0px 4px"
+									width="2"
+									iconVisible
+									options={locationsOptions}
+									value={selectdLocation}
+									onChange={handleChangeLocations}
+								/>
+								<Select
+									onChange={handleChangeRadius}
+									value={selectedRadius}
+									placeholder="Raio"
+									borderRadius="0px 3px 3px 0px"
+									width="1"
+									options={radiusOptions}
+								/>
+							</S.Row>
+							<S.Row>
+								<Select
+									placeholder="Ano desejado"
+									width="2"
+									onChange={handleChangeYear}
+									value={selectedYear}
+									options={yearOptions}
+								/>
+								<Select
+									placeholder="Faixa de preço"
+									options={priceOptions}
+									onChange={handleChangePrice}
+									value={selectePrice}
+									width="2"
+									mLeft="16px"
+								/>
+							</S.Row>
+						</S.Column>
+						<S.Column>
+							<S.Row>
+								<Select
+									placeholder="Marca"
+									width="1"
+									message="nenhuma marca"
+									mLeft="16px"
+									value={selectedMake}
+									onChange={handleChangeMakes}
+									options={parseMake(makesOptions)}
+								/>
+								<Select
+									placeholder={loadingModels ? 'buscando...' : 'Modelos'}
+									value={selectedModel}
+									message="nenhum modelo"
+									onChange={handleChangeModels}
+									options={parseMake(modelsOptions)}
+									width="1"
+									mLeft="16px"
+								/>
+							</S.Row>
+							<S.Row>
+								<Select
+									placeholder={loadingVersions ? 'buscando...' : 'Versão'}
+									message="nenhuma versão"
+									options={parseMake(versionsOptions)}
+									value={selectedVersion}
+									onChange={handleChangeVersions}
+									width="1"
+									mLeft="16px"
+								/>
+							</S.Row>
+						</S.Column>
+					</S.Row>
+					<S.Row
+						style={{ justifyContent: 'space-between', alignItems: 'center' }}
+					>
+						<S.ButtonDropDown>
+							<S.Icon icon={['fas', 'angle-right']} />
+							Busca Avançada
+						</S.ButtonDropDown>
+						<S.ButtonsWrapper>
+							<S.TextButtom onClick={clearFilters}>Limpar filtros</S.TextButtom>
+							<S.ButtonDefault>VER OFERTAS</S.ButtonDefault>
+						</S.ButtonsWrapper>
+					</S.Row>
+				</S.TabContent>
+			)}
 		</>
 	);
 }
